@@ -32,14 +32,28 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="{{route('auth')}}" method="POST">
+				<form class="login100-form validate-form" action="{{ route('auth') }}" method="POST">
                     @csrf
 
                     <a href="/" class="btn btn-sm btn-primary">Kembali</a>
 					<span class="login100-form-title p-b-43">
 						Login to continue
 					</span>
-					@extends('template.pesan.alert')
+					@if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $item)
+									<li>{{ $item }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
+
+					@if (session('success'))
+						<div class="alert alert-success alert-dismissible fade show">
+							{{ session('success') }}
+						</div>
+					@endif
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email" value="{{old('email')}}">
