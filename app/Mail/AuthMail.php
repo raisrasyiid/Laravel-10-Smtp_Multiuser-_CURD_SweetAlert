@@ -21,7 +21,7 @@ class AuthMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Verifikasi Akun')->view('mail/verify');
+        return $this->subject('Verifikasi Akun')->view('mail.verify');
     }
 
     /**
