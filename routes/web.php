@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DataMahasiswa;
+use App\Http\Controllers\UserControlController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +35,15 @@ Route::middleware(['auth'])->group(function () {
     Route::redirect('/home', '/user');
     Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware('userAkses:admin');
     Route::get('/user', [UserController::class, 'index'])->name('user')->middleware('userAkses:user');
+
+
+    Route::get('/datamahasiswa', [DataMahasiswa::class, 'index'])->name('datamahasiswa');
+    Route::get('/damaedit', [DataMahasiswa::class, 'tambah']);
+    Route::get('/damaedit/{id}', [DataMahasiswa::class, 'edit']);
+    Route::post('/damahapus/{id}', [DataMahasiswa::class, 'hapus']);
+
+    Route::get('/usercontrol', [UserControlController::class, 'index'])->name('usercontrol');
+
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
